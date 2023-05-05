@@ -2,3 +2,11 @@ en:
   appname: "Go Auction!"
   apptitle: "Where you buy your dreams"
   welcome: "Welcome to Go Auction, Dreams on a bid distance!"
+  hello: "Hello!"
+  hello_admin: "Hello Admin!"
+  signup_as:
+    user: "Sign Up"
+    errors:
+      password_length: "The password must be at least 6 characters long"
+    register: "Register"
+  log_out: "Logout"

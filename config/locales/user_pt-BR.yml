@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      user: "Usuário"
+    attributes:
+      user:
+        name: "Nome"
+        address: "Endereço"
+        zip: "CEP"
+        cpf: "CPF"

@@ -33,8 +33,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       # t.datetime :locked_at
 
       t.string :name
-      t.string :cpf
       t.string :address
+      t.string :cpf
       t.string :zip
 
       t.timestamps null: false

@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    models:
+      user: "User"
+    attributes:
+      user:
+        name: "Name"
+        address: "Address"
+        zip: "Zip"
+        cpf: "CPF"

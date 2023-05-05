@@ -15,6 +15,20 @@
         <h1><%= t(:appname) %> </h1>
       <%end%>
       <strong><%= t(:apptitle)%></strong>
+      <nav id="main_nav">
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <%= "#{t('hello_admin')} #{current_user.description}"%> |
+            <%= button_to t("log_out"), destroy_user_session_path, method: :delete %> 
+          <%else%>
+            <%= "#{t('hello')} #{current_user.description}"%> |
+            <%= button_to t("log_out"), destroy_user_session_path, method: :delete %>
+          <%end%> 
+        <%else%>
+          <%= link_to t("signup_as.user"), new_user_registration_path %> |
+          <%= link_to t("sign_in"), new_user_session_path %>
+        <%end%>
+      </nav>
     </header>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

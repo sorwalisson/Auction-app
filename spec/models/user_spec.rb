@@ -1,60 +1,100 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'validations' do
-    context 'presence: true' do
-      it 'name must be present' do
-        new_user = User.new(email: "walisson@santos.com", password: "password", name: '', cpf: "72601326042", 
-                            address: "Avenida Durval de Goes Monteiro, 250", zip: "57071-120")
-
-        expect(new_user.valid?).to be_falsy
-      end
-
-      it 'address must be present' do
-        new_user = User.new(email: "walisson@santos.com", password: "password", name: 'Walisson', cpf: "72601326042", 
-                            address: "", zip: "57071-120")
-
-        expect(new_user.valid?).to be_falsy
-      end
-
-      it 'cpf must be present' do
-        new_user = User.new(email: "walisson@santos.com", password: "password", name: 'Walisson', cpf: "", 
-                            address: "Avenida Durval de Goes Monteiro, 250", zip: "57071-120")
-
-        expect(new_user.valid?).to be_falsy
-      end
-
-      it 'zip must be present' do
-        new_user = User.new(email: "walisson@santos.com", password: "password", name: '', cpf: "72601326042", 
-                            address: "Avenida Durval de Goes Monteiro, 250", zip: "")
-
+  describe 'Validations' do
+    context 'name validations' do
+      it 'it must be present' do
+        new_user = User.new(name: "", password: "password", email: 'sorwalisson@email.com', 
+                            address: "Avenida Fernandes Lima, 35", zip: "57000-100", cpf: "72601326042")
+        
         expect(new_user.valid?).to be_falsy
       end
     end
 
-    context 'cpf uniqueness' do
-      it 'cpf must be unique' do
-        User.create!(email: "walisson@santos.com", password: "password", name: 'Walisson', cpf: "72601326042", 
-                     address: "Avenida Durval de Goes Monteiro, 250", zip: "57071-120")
-        new_user = User.new(email: "Zezin@oliveira.com", password: "password", name: "zezin", cpf: "72601326042", 
-                            address: "Rua do zezin 888", zip: "57000-000")
+    context 'cpf validations' do
+      it 'it must be present' do
+        new_user = User.new(name: "Walisson", password: "password", email: 'sorwalisson@email.com', 
+          address: "Avenida Fernandes Lima, 35", zip: "57000-100", cpf: "")
+
+        expect(new_user.valid?).to be_falsy
+      end
+
+      it 'it must be unique' do
+        new_user = User.create!(name: "Walisson", password: "password", email: 'sorwalisson@email.com', 
+                                address: "Avenida Fernandes Lima, 35", zip: "57000-100", cpf: "72601326042")
+        second_user = User.new(name: "Otávio", password: "password", email: 'otavio@email.com', 
+                               address: "Rua 1, 50", zip: '57000-100', cpf: "72601326042")
+        
+        expect(second_user.valid?).to be_falsy
+      end
+
+      it 'it must be a valid cpf, case correct length but no valid' do
+        new_user = User.new(name: "Walisson", password: "password", email: 'sorwalisson@email.com', 
+                            address: "Avenida Fernandes Lima, 35", zip: "57000-100", cpf: "72333321356")
+
+        expect(new_user.valid?).to be_falsy
+      end
+
+      it 'it must have the correct length :11' do
+        new_user = User.new(name: "Walisson", password: "password", email: 'sorwalisson@email.com', 
+                            address: "Avenida Fernandes Lima, 35", zip: "57000-100", cpf: "723336")
+        
         expect(new_user.valid?).to be_falsy
       end
     end
 
-    context 'cpf must be a valid cpf.' do
-      it 'it must be a valid cpf, case when cpf is negative' do
-        new_user = User.new(email: "walisson@santos.com", password: "password", name: 'Walisson', cpf: "44444444444", 
-                            address: "Avenida Durval de Goes Monteiro, 250", zip: "57071-120")    
+    context 'zip validations' do
+      it 'it must be present' do
+        new_user = User.new(name: "Walisson", password: "password", email: 'sorwalisson@email.com', 
+                            address: "Avenida Fernandes Lima, 35", zip: "", cpf: "72601326042")
         
         expect(new_user.valid?).to be_falsy
       end
 
-      it 'it must be a valid cpf, case when cpf is positive' do
-        new_user = User.new(email: "walisson@santos.com", password: "password", name: 'Walisson', cpf: "72601326042", 
-                            address: "Avenida Durval de Goes Monteiro, 250", zip: "57071-120")    
+      it 'it must be a valid zip code, with correct length' do
+        new_user = User.new(name: "Walisson", password: "password", email: 'sorwalisson@email.com', 
+                            address: "Avenida Fernandes Lima, 35", zip: "570-100", cpf: "72601326042")
 
-        expect(new_user.valid?).to be_truthy
+        expect(new_user.valid?).to be_falsy
+      end
+
+      it 'it must not have non number characters other than the -' do
+        new_user = User.new(name: "Walisson", password: "password", email: 'sorwalisson@email.com', 
+                            address: "Avenida Fernandes Lima, 35", zip: "570ab-100", cpf: "72601326042")
+        
+        expect(new_user.valid?).to be_falsy
+      end
+
+      it 'it must have only one -' do
+        new_user = User.new(name: "Walisson", password: "password", email: 'sorwalisson@email.com', 
+                            address: "Avenida Fernandes Lima, 35", zip: "5702--100", cpf: "72601326042")
+        
+        expect(new_user.valid?).to be_falsy
+      end
+    end
+
+    context 'address validations' do
+      it 'address must be present' do
+        new_user = User.new(name: "Walisson", password: "password", email: 'sorwalisson@email.com', 
+                            address: "", zip: "57000-100", cpf: "72601326042")
+        
+        expect(new_user.valid?).to be_falsy
+      end
+    end
+
+    context 'email validations' do
+      it 'if email != @leilaodogalpao.com.br then it should be regular user' do
+        new_user = User.create!(name: "Walisson", password: "password", email: 'sorwalisson@email.com', 
+                                address: "Avenida Fernandes Lima, 35", zip: "57000-100", cpf: "72601326042")
+        
+        expect(new_user.admin?).to be_falsy
+      end
+
+      it 'if email ends with @leilaodogalpao.com.br the it must be admin' do
+        new_user = User.create!(name: "Walisson", password: "password", email: 'sorwalisson@leilaodogalpao.com.br', 
+                                address: "Avenida Fernandes Lima, 35", zip: "57000-100", cpf: "72601326042")
+                              
+        expect(new_user.admin?).to be_truthy
       end
     end
   end
