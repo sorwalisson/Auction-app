@@ -5,6 +5,10 @@ en:
     attributes:
       user:
         name: "Name"
-        address: "Address"
-        zip: "Zip"
-        cpf: "CPF"
+        description: "Description"
+        weight: "Weight"
+        height: "height"
+        width: "Width"
+        depth: "Depth"
+        image_url: "Image URL"
+        category: "Category"

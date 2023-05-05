@@ -10,3 +10,4 @@ pt-BR:
       password_length: "A senha deve ter no mínimo 6 caracteres"
     register: "Cadastrar-se"
   log_out: "Logout"
+  admin_menu: "Admin Menu"

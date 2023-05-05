@@ -10,3 +10,10 @@ en:
       password_length: "The password must be at least 6 characters long"
     register: "Register"
   log_out: "Logout"
+  admin_menu: 
+    title: "Admin Menu"
+    create_section: 
+      title: "Create Section"
+      create_product_model: "Add a new product model"
+  action:
+    new: "New"
