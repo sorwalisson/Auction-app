@@ -3,6 +3,8 @@ class AuctionLot < ApplicationRecord
   validates :starting_time, :ending_time, :auction_code, :starting_bid, :bid_difference, presence: true
   validates :auction_code, uniqueness: true
   validate :code_validation
+  has_many :itens
+  has_many :bids
 
 
   def code_validation
@@ -25,5 +27,14 @@ class AuctionLot < ApplicationRecord
     end
     if count_n != 6 and count_l != 3 then self.errors.add(:auction_code, "Must have 3 lower case letters and 6 numbers") end
     end
+  end
+
+  def highest_bid
+    self.bids.order("offer DESC").first.offer
+  end
+
+  def new_bid_value
+    x = self.highest_bid * self.bid_difference / 100
+    highest_bid + x
   end
 end
