@@ -10,18 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_05_212510) do
-  create_table "product_models", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_05_06_011437) do
+  create_table "auction_lots", force: :cascade do |t|
+    t.datetime "starting_time"
+    t.datetime "ending_time"
+    t.string "auction_code"
+    t.integer "status", default: 0
+    t.integer "starting_bid"
+    t.integer "bid_difference"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "items", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "weight"
     t.integer "height"
     t.integer "width"
     t.integer "depth"
-    t.string "image_url"
+    t.string "img_url"
     t.integer "category"
+    t.string "item_code"
+    t.integer "auction_lot_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["auction_lot_id"], name: "index_items_on_auction_lot_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,4 +55,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_212510) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "items", "auction_lots"
 end
