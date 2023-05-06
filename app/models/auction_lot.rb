@@ -1,9 +1,9 @@
 class AuctionLot < ApplicationRecord
-  enum status: {draft: 0, awaiting_confirmation: 1, confirmed: 2, started: 3, ended: 4}
+  enum status: {draft: 0, awaiting_confirmation: 1, confirmed: 2, running: 3, ended: 4}
   validates :starting_time, :ending_time, :auction_code, :starting_bid, :bid_difference, presence: true
   validates :auction_code, uniqueness: true
   validate :code_validation
-  has_many :itens
+  has_many :items
   has_many :bids
 
 
@@ -30,11 +30,17 @@ class AuctionLot < ApplicationRecord
   end
 
   def highest_bid
-    self.bids.order("offer DESC").first.offer
+    if self.bids.count > 0 then self.bids.order("offer DESC").first.offer end
   end
 
   def new_bid_value
     x = self.highest_bid * self.bid_difference / 100
     highest_bid + x
+  end
+
+  def highest_bid_user
+    if self.bids.count > 0
+      self.bids.order("offer DESC").first.user_id
+    end
   end
 end

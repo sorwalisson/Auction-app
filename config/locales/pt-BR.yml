@@ -11,3 +11,4 @@ pt-BR:
     register: "Cadastrar-se"
   log_out: "Logout"
   admin_menu: "Admin Menu"
+  running_auction: "Running Auctions"

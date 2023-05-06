@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    models:
+      item:
+        one: "Item"
+        other: "Items"
+    attributes:
+      item:
+        user_id: "User"
+        offer: "Offer"
+        auction_id: "Auction"

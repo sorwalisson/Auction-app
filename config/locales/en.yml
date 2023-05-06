@@ -10,6 +10,8 @@ en:
       password_length: "The password must be at least 6 characters long"
     register: "Register"
   log_out: "Logout"
+  running_auction: "Running Auctions"
+  no_bids_yet: "No one bid this lot yet"
   admin_menu: 
     title: "Admin Menu"
     create_section: 

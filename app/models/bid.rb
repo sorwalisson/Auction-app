@@ -11,9 +11,11 @@ class Bid < ApplicationRecord
       return 
     end
     if self.user.admin?
-      self.errors.add(:offer, "must not be made by an admin!")
+      self.errors.add(:user_id, "User Admin cannot place bids")
       return
     end
+    if self.auction_lot.status != "running" then self.errors.add(:auction_id, "The auction must be running") end
+    if self.auction_lot.highest_bid_user == self.user_id then self.errors.add(:user_id, "You already hold the highest bid") end
     bid_auction_validation()
   end
   

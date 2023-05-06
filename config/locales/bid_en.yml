@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      bid: "Bid"
+    attributes:
+      bid:
+        user_id: "User"
+        offer: "Offer"
+        auction_id: "Auction"

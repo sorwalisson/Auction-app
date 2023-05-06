@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get 'admin_menu', action: :admin_menu, controller: "home"
 
-  resources :product_models, only: [:new]
+  resources :items, only: [:show]
+  resources :auction_lots, only: [:show]
 end

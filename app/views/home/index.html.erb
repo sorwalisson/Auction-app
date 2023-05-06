@@ -1,1 +1,39 @@
 <h2><%= t(:welcome)%></h2>
+
+<div id="running auctions">
+  <h3><%= t("running_auction") %></h3>
+  <% @auctions.where(status: :running).each do |auction|%>
+    <dl>
+      <dt><%= AuctionLot.human_attribute_name(:auction_code) %>:</dt>
+      <dd><%= link_to auction.auction_code, auction_lot_path(id: auction.id) %></dd>
+      <dt><%= AuctionLot.human_attribute_name(:ending_time) %>:</dt>
+      <dd><%= auction.ending_time %></dd>
+      <dt><%= AuctionLot.human_attribute_name(:highest_bid) %>:</dt>
+      <dd><%= if auction.highest_bid.present? then auction.highest_bid end%> <%= if auction.highest_bid.nil? then t(:no_bids_yet) end %></dt>
+      <dt><%= Item.model_name.human(:count => 2)%>:</dt>
+        <% auction.items.each do |item| %>
+          <dd><%= link_to item.name, item_path(id: item.id) %></dt>
+        <%end%>  
+    </dl>
+  <%end%>
+</div> 
+
+<div id="Upcoming Auctions">
+  <h4><%= t("upcoming_auctions")%></h4>
+  <%= @auctions.where(status: :confirmed).each do |auction| %>
+    <dl>
+      <dt><%= AuctionLot.human_attribute_name(:auction_code) %>:</dt>
+      <dd><%= link_to auction.auction_code, auction_lot_path(id: auction.id) %></dd>
+      <dt><%= AuctionLot.human_attribute_name(:starting_time) %>:</dt>
+      <dd><%= auction.starting_time %></dd>
+      <dt><%= AuctionLot.human_attribute_name(:ending_time) %>:</dt>
+      <dd><%= auction.ending_time %></dd>
+      <dt><%= AuctionLot.human_attribute_name(:starting_bid) %>:</dt>
+      <dd><%= auction.starting_bid%></dd>
+      <dt><%= Item.model_name.human(:count => 2)%>:</dt>
+        <% auction.items.each do |item| %>
+          <dd><%= link_to item.name, item_path(id: item.id) %></dt>
+        <%end%>  
+    </dl>
+  <%end%>
+</div>

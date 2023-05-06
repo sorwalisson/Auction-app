@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    models:
+      auction_lot: "Auction Lot"
+    attributes:
+      auction_lot:
+        auction_code: "Lot Code"
+        starting_time: "Starts At"
+        ending_time: "Ends At"
+        highest_bid: "Current highest bid"
+        starting_bid: "Starting Bid"
