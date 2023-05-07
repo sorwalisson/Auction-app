@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   get 'admin_menu', action: :admin_menu, controller: "home"
 
   resources :items, only: [:show]
-  resources :auction_lots, only: [:show]
+  resources :auction_lots, only: [:show, :new, :create, :show] do
+    post 'awaiting_confirmation', on: :member
+  end
 end

@@ -9,3 +9,6 @@ en:
         ending_time: "Ends At"
         highest_bid: "Current highest bid"
         starting_bid: "Starting Bid"
+        bid_difference: "Bid Difference"
+        status: "Status"
+        user_id: "Created by"

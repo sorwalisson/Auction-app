@@ -15,7 +15,14 @@ en:
   admin_menu: 
     title: "Admin Menu"
     create_section: 
-      title: "Create Section"
-      create_product_model: "Add a new product model"
+      title: "Creation Section"
+      create_auction: "Create a new auction"
   action:
     new: "New"
+    create:
+      auction: "Create Auction"
+    set_awaiting_confirmation: "Change status to awaiting confirmation"
+  status_msg:
+    auction:
+      created: "The new auction was created sucessfully!"
+      no_lot_items: "This auctions cannot be put to confirmations due to the lack of items"

@@ -5,6 +5,7 @@ class AuctionLot < ApplicationRecord
   validate :code_validation
   has_many :items
   has_many :bids
+  belongs_to :user
 
 
   def code_validation

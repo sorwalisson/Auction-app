@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates_with CpfValidator
   validates_with ZipValidator
   validate :set_admin_or_user
+  has_many :auction_lots
 
 
   def set_admin_or_user
@@ -15,6 +16,10 @@ class User < ApplicationRecord
   end
 
   def description
+    "#{self.name} - #{self.email}"
+  end
+
+  def full_description
     "#{self.name} - #{self.email}"
   end
 end

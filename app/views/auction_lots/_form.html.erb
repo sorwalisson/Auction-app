@@ -1,0 +1,23 @@
+<%= form_with(model: @auction_lot) do |f| %>
+  <div>
+    <%= f.label :auction_code %>
+    <%= f.text_field :auction_code %>
+  </div>
+  <div>
+    <%= f.label :starting_time %>
+    <%= f.datetime_field :starting_time %>
+  </div>
+  <div>
+    <%= f.label :ending_time %>
+    <%= f.datetime_field :ending_time %>
+  </div>
+  <div>
+    <%= f.label :starting_bid %>
+    <%= f.number_field :starting_bid %>
+  </div>
+  <div>
+    <%= f.label :bid_difference %>
+    <%= f.number_field :bid_difference %>
+  </div>
+  <%= f.submit I18n.translate('action.create.auction')%>
+<%end%>
