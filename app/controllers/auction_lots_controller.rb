@@ -1,6 +1,6 @@
 class AuctionLotsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
-  before_action :authenticate_user_admin, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user_admin, only: [:new, :create, :edit, :update]
   def show
     set_lot_and_verify
   end
@@ -44,7 +44,7 @@ class AuctionLotsController < ApplicationController
 
   def set_lot_and_verify
     @auction_lot = AuctionLot.find_by(id: params[:id])
-    if @auction_lot.status != "running" and @auction_lot != "ended" and @auction_lot != "awaiting_confirmation" then authenticate_user_admin end
+    if @auction_lot.status != "running" and @auction_lot != "ended" and @auction_lot != "confirmed" then authenticate_user_admin end
     @auction_lot
   end
 
