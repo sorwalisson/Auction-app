@@ -5,5 +5,6 @@ class HomeController < ApplicationController
   end
 
   def admin_menu
+    @auctions = AuctionLot.all
   end
 end

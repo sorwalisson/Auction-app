@@ -13,20 +13,10 @@
   <dt><%= AuctionLot.human_attribute_name(:status)%>:</dt>
   <dd><%= @auction_lot.status %><dd>
   <dt><%= AuctionLot.human_attribute_name(:user_id)%>:</dt>
-  <dd><%= @auction_lot.user.full_description %><dd>
-  <dt><%= Item.model_name.human(:count => 2)%>:</dt>
   <% if @auction_lot.items.present? %>
     <% @auction_lot.items.each do |item|%>
       <dd><%= link_to item.name, item_path(id: item.id) %></dd>
     <%end%>
   <%end%>
 </dl>
-
-<% if @auction_lot.items.present? %>
-  <%= button_to t('action.set_awaiting_confirmation'), awaiting_confirmation_auction_lot_path, method: :post %>
-<% else %>
-  <%= t('status_msg.auction.no_lot_items')%>
-<%end%>
-<%= link_to t('action.edit.auction'), edit_auction_lot_path(id: @auction_lot.id)%>
 <%= link_to "Home Page", root_path %>
-<%= link_to t('admin_menu.title'), admin_menu_path %>

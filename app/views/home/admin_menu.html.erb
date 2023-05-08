@@ -5,4 +5,16 @@
     <p><strong><%= t('admin_menu.create_section.title')%></strong></p>
       <p><%= link_to t("admin_menu.create_section.create_auction"), new_auction_lot_path %></p>
   </div>
+  <div id = "edit">
+    <p><strong><%= t("admin_menu.edit_section") %></strong></p>
+    <% @auctions.where(status: :draft).each do |auction| %>
+      <dl>
+        <dt><%= AuctionLot.human_attribute_name(:auction_code)%>:</dt>
+        <dd><%= link_to auction.auction_code, auction_lot_path(id: auction.id) %></dd>
+        <dt><%= AuctionLot.human_attribute_name(:starting_time) %></dt>
+        <dd><%= auction.starting_time %></dd>
+        <dt><%= AuctionLot.human_attribute_name(:starting_bid)%></dt>
+        <dd><%= auction.starting_bid %></dd>
+      </dl>
+    <%end%>  
 </div>

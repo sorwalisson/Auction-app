@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user_admin
-    redirect_to root_path unless current_user.admin?
+    redirect_to root_path, notice: t('status_msg.auction.acess_denied') unless current_user.admin?
   end
 end

@@ -14,7 +14,7 @@ describe 'Admin goes to create auction through admin menu' do
     fill_in "Ends At", with: 3.days.from_now
     fill_in "Starting Bid", with: 5000
     fill_in "Bid Difference", with: 5
-    click_on "Create Auction"
+    click_on "Save"
 
 
     expect(page).to have_content "The new auction was created sucessfully!"
@@ -25,6 +25,16 @@ describe 'Admin goes to create auction through admin menu' do
     expect(page).to have_content "Bid Difference: 5%"
     expect(page).to have_content "Status: draft"
     expect(page).to have_content "Created by: Walisson - sorwalisson@leilaodogalpao.com.br"
+  end
+
+  it 'users that is not an admin tries to create a new auction' do
+    new_user = User.create!(name: "Stuart", email: "stuart@email.com", password: "Password", address: "Avenida stuart little 3", zip: "23000-000", cpf: "06516551022")
+
+    login_as(new_user)
+    visit new_auction_lot_path
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content "You do not have permission to access this page."
   end
 end
     
