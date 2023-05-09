@@ -5,8 +5,8 @@
     <p><strong><%= t('admin_menu.create_section.title')%></strong></p>
       <p><%= link_to t("admin_menu.create_section.create_auction"), new_auction_lot_path %></p>
   </div>
-  <div id = "edit">
-    <p><strong><%= t("admin_menu.edit_section") %></strong></p>
+  <div id = "draft">
+    <p><strong><%= t("admin_menu.draft_section") %></strong></p>
     <% @auctions.where(status: :draft).each do |auction| %>
       <dl>
         <dt><%= AuctionLot.human_attribute_name(:auction_code)%>:</dt>

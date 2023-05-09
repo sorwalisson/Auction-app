@@ -18,7 +18,7 @@ en:
     create_section: 
       title: "Creation Section"
       create_auction: "Create a new auction"
-    edit_section: "Edit a draft auction"
+    draft_section: "Draft auctions"
   action:
     new: "New"
     create:
@@ -26,11 +26,13 @@ en:
     edit:
       auction: "Edit Auction"
     set_awaiting_confirmation: "Change status to awaiting confirmation"
+    set_confirmed: "Change status to confirmed"
   status_msg:
     auction:
       created: "The new auction was created sucessfully!"
       no_lot_items: "This auctions cannot be put to confirmations due to the lack of items"
       acess_denied: "You do not have permission to access this page."
+      set_awaiting: "The auction is now set as awaiting confirmation"
     general:
       updated_successfully: "Auction was updated sucessfully."
       update_failed: "Update failed, try again and check the fields below"

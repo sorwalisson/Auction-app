@@ -1,6 +1,6 @@
 class AuctionLotsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :authenticate_user_admin, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :awaiting_confirmation]
+  before_action :authenticate_user_admin, only: [:new, :create, :edit, :update, :awaiting_confirmation]
   def show
     set_lot_and_verify
   end
@@ -36,6 +36,11 @@ class AuctionLotsController < ApplicationController
     end
   end
 
+  def awaiting_confirmation
+    set_lot_for_update
+    @auction_lot.update(status: :awaiting_confirmation)
+    redirect_to @auction_lot, notice: t('status_msg.auction.set_awaiting')
+  end
 
   private
   def auction_lot_params
@@ -50,7 +55,7 @@ class AuctionLotsController < ApplicationController
 
   def set_lot_for_update
     @auction_lot = AuctionLot.find_by(id: params[:id])
-    if @auction_lot.status != "draft" then redirect_to root_path, notice: t('acess.denied') end
+    if @auction_lot.status != "draft" then redirect_to root_path, notice: t('status_msg.auction.acess_denied') end
     @auction_lot
   end
 end
