@@ -6,6 +6,15 @@ en:
         other: "Items"
     attributes:
       item:
-        user_id: "User"
-        offer: "Offer"
-        auction_id: "Auction"
+        user_id: "Admin"
+        auction_id: "Auction Lot"
+        name: "Name"
+        description: "Description"
+        weight: "Weight"
+        height: "Height"
+        width: "Width"
+        depth: "Depth"
+        dimensions: "Dimensions"
+        photo: "Photo"
+        category: "Category"
+        item_code: "Item Code"

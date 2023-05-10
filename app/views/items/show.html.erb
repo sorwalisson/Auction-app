@@ -1,0 +1,18 @@
+<h2><%= Item.model_name.human %></h2>
+<dl>
+  <dt><%= Item.human_attribute_name(:name) %>:</dt>
+  <dd><%= @item.name %></dd>
+  <dt><%= Item.human_attribute_name(:description) %>:</dt>
+  <dd><%= @item.description %></dd>
+  <dt><%= Item.human_attribute_name(:weight) %>:</dt>
+  <dd><%= @item.weight %>g</dd>
+  <dt><%= Item.human_attribute_name(:dimensions) %>:</dt>
+  <dd><%= @item.dimensions %></dd>
+  <dt><%= Item.human_attribute_name(:item_code)%>:</dt>
+  <dd><%= @item.item_code %></dd>
+  <dt><%= Item.human_attribute_name(:category)%>:</dt>
+  <dd><%= @item.category.capitalize %><dd>
+  <%= image_tag @item.photo%>
+</dl>
+<%= link_to "Home Page", root_path %>
+<%= link_to t('back_to_auction'), auction_lot_path(id: @item.auction_lot_id) %>

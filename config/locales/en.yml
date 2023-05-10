@@ -13,6 +13,7 @@ en:
   log_out: "Logout"
   running_auction: "Running Auctions"
   no_bids_yet: "No one bid this lot yet"
+  back_to_auction: "Go back to item's auction"
   admin_menu: 
     title: "Admin Menu"
     create_section: 
@@ -28,6 +29,7 @@ en:
       auction: "Edit Auction"
     set_awaiting_confirmation: "Change status to awaiting confirmation"
     set_confirmed: "Change status to confirmed"
+    add_item: "Add an item"
   status_msg:
     auction:
       created: "The new auction was created sucessfully!"
@@ -39,3 +41,6 @@ en:
     general:
       updated_successfully: "Auction was updated sucessfully."
       update_failed: "Update failed, try again and check the fields below"
+    item:
+      item_saved: "The item was added sucessfully!"
+      item_not_saved: "Item not saved, check the errors!"

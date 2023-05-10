@@ -1,0 +1,36 @@
+<%= form_with(model: [@auction_lot, @item]) do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description, :cols => 4, :rows => 3 %>
+  </div>
+  <div>
+    <%= f.label :weight %>
+    <%= f.number_field :weight %>
+  </div>
+  <div>
+    <%= f.label :height %>
+    <%= f.number_field :height %>
+  </div>
+  <div>
+    <%= f.label :width %>
+    <%= f.number_field :width %>
+  </div>
+  <div>
+    <%= f.label :depth %>
+    <%= f.number_field :depth %>
+  </div>
+  <div>
+    <%= f.label :category %>
+    <%= f.select :category, Item.categories.keys %>
+  </div>
+  <div>
+    <%= f.label :photo %>
+    <%= f.file_field :photo %>
+  </div>
+
+  <%= f.submit I18n.translate('save')%>
+<%end%>

@@ -22,6 +22,7 @@
   <%end%>
 </dl>
 
+<%= link_to t('action.add_item'), new_auction_lot_item_path(auction_lot_id: @auction_lot.id) %>
 <% if @auction_lot.items.present? %>
   <%= button_to t('action.set_awaiting_confirmation'), awaiting_confirmation_auction_lot_path, method: :post %>
 <% else %>
