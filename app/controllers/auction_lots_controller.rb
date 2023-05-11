@@ -59,7 +59,7 @@ class AuctionLotsController < ApplicationController
 
   def set_lot_and_verify
     @auction_lot = AuctionLot.find_by(id: params[:id])
-    if @auction_lot.status != "running" and @auction_lot != "ended" and @auction_lot != "confirmed" then authenticate_user_admin end
+    if @auction_lot.status != "running" and @auction_lot.status != "ended" and @auction_lot.status != "confirmed" then authenticate_user_admin end
     @auction_lot
   end
 

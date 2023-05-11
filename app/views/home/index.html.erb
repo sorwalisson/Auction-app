@@ -12,7 +12,7 @@
       <dd><%= if auction.highest_bid.present? then auction.highest_bid end%> <%= if auction.highest_bid.nil? then t(:no_bids_yet) end %></dt>
       <dt><%= Item.model_name.human(:count => 2)%>:</dt>
         <% auction.items.each do |item| %>
-          <dd><%= link_to item.name, item_path(id: item.id) %></dt>
+          <dd><%= link_to item.name, auction_lot_item_path(auction_lot_id: auction.id, id: item.id) %></dt>
         <%end%>  
     </dl>
   <%end%>
@@ -32,7 +32,7 @@
       <dd><%= auction.starting_bid%></dd>
       <dt><%= Item.model_name.human(:count => 2)%>:</dt>
         <% auction.items.each do |item| %>
-          <dd><%= link_to item.name, item_path(id: item.id) %></dt>
+          <dd><%= link_to item.name, auction_lot_item_path(auction_lot_id: auction.id, id: item.id) %></dt>
         <%end%>  
     </dl>
   <%end%>

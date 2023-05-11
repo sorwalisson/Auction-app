@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
   before_action :authenticate_user_admin, only: [:new, :create]
   
   def show
-    @auction_lot = AuctionLot.find_by(id: params[:auction_lot_id])
     @item = Item.find_by(id: params[:id])
   end
   
