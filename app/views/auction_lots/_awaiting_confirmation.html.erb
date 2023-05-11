@@ -17,7 +17,7 @@
   <dt><%= Item.model_name.human(:count => 2)%>:</dt>
   <% if @auction_lot.items.present? %>
     <% @auction_lot.items.each do |item|%>
-      <dd><%= link_to item.name, item_path(id: item.id) %></dd>
+      <dd><%= link_to item.name, auction_lot_item_path(auction_lot_id: @auction_lot, id: item.id) %></dd>
     <%end%>
   <%end%>
 </dl>
