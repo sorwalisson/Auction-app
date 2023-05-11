@@ -44,4 +44,27 @@ class AuctionLot < ApplicationRecord
       self.bids.order("offer DESC").first.user_id
     end
   end
+
+  def status_updater
+    if self.status == "draft" 
+      self.update(status: :awaiting_confirmation) 
+      self.save
+      return
+    end
+    if self.status == "awaiting_confirmation"
+      StatusChangerJob.perform_at(self.starting_time, self.id)
+      self.update(status: :confirmed)
+      self.save
+      return
+    end
+    if self.status == "confirmed"
+      StatusChangerJob.perform_at(self.ending_time, self.id)
+      self.update(status: :running)
+      self.save
+      return
+    end
+    if self.status == "running" 
+      self.update(status: :ended) 
+    end
+  end
 end

@@ -38,7 +38,7 @@ class AuctionLotsController < ApplicationController
 
   def awaiting_confirmation
     set_lot_for_update
-    @auction_lot.update(status: :awaiting_confirmation)
+    @auction_lot.status_updater
     redirect_to @auction_lot, notice: t('status_msg.auction.set_awaiting')
   end
 
@@ -47,7 +47,7 @@ class AuctionLotsController < ApplicationController
     if current_user.id == @auction_lot.user_id
       redirect_to @auction_lot, notice: t('status_msg.auction.not_set_confirmed')
     else 
-      @auction_lot.update(status: :confirmed)
+      @auction_lot.status_updater
       redirect_to @auction_lot, notice: t('status_msg.auction.set_confirmed')
     end
   end
