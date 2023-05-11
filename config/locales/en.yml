@@ -5,6 +5,7 @@ en:
   hello: "Hello!"
   hello_admin: "Hello Admin!"
   save: "Save"
+  bid: "Bid Auction"
   signup_as:
     user: "Sign Up"
     errors:
@@ -45,3 +46,7 @@ en:
       item_saved: "The item was added sucessfully!"
       item_not_saved: "Item not saved, check the errors!"
       auction_not_draft: "You cannot add a new item to this auction because it is past the draft phase."
+    bid:
+      bid_saved: "The bid was made sucessfully."
+      bid_not_save: "It was not possible to create the bid."
+      if_admin: "Admin cannot place bids!"

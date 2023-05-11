@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
   resources :auction_lots, only: [:show, :new, :create, :show, :edit, :update] do
     resources :items, only: [:new, :create, :show]
+    resources :bids, only: [:create]
     post 'awaiting_confirmation', on: :member
     post 'confirmed', on: :member
   end

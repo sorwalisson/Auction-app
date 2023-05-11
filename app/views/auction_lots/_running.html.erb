@@ -12,11 +12,23 @@
   <dd><%= @auction_lot.bid_difference %>%</dd>
   <dt><%= AuctionLot.human_attribute_name(:status)%>:</dt>
   <dd><%= @auction_lot.status %><dd>
-  <dt><%= AuctionLot.human_attribute_name(:user_id)%>:</dt>
+  <dt><%= AuctionLot.human_attribute_name(:highest_bid)%>:</dt>
+  <dd><%= @auction_lot.highest_bid %><dd>
+  <dt><%= AuctionLot.human_attribute_name(:bids_count)%>:</dt>
+  <dd><%= @auction_lot.bids.count %></dd>
   <% if @auction_lot.items.present? %>
     <% @auction_lot.items.each do |item|%>
       <dd><%= link_to item.name, auction_lot_item_path(auction_lot_id: @auction_lot, id: item.id) %></dd>
     <%end%>
   <%end%>
 </dl>
+<div id= "bid">
+  <%if user_signed_in? and current_user.id != @auction_lot.highest_bid_user %>
+    <%= form_with(url: "/auction_lots/#{@auction_lot.id}/bids") do |f| %>
+        <%= f.label :offer %>
+        <%= f.number_field :offer %>
+        <%= f.submit t('bid') %>
+    <%end%>
+  <%end%>
+</div>
 <%= link_to "Home Page", root_path %>

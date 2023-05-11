@@ -12,3 +12,4 @@ en:
         bid_difference: "Bid Difference"
         status: "Status"
         user_id: "Created by"
+        bids_count: "Number of bids received"
