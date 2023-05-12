@@ -13,8 +13,13 @@ en:
     register: "Register"
   log_out: "Logout"
   running_auction: "Running Auctions"
+  ended_auction: "Finished Auctions"
   no_bids_yet: "No one bid this lot yet"
+  no_bids_placed: "This Auction didn't received any bids"
+  no_winner: "No one bid this auction"
+  auction_canceled: "This offer was canceled due to no bids"
   back_to_auction: "Go back to item's auction"
+  item_move_msg: "Items from this auction can be transfered to a new auction, go to item's page to move them."
   admin_menu: 
     title: "Admin Menu"
     create_section: 
@@ -22,6 +27,8 @@ en:
       create_auction: "Create a new auction"
     draft_section: "Draft auctions"
     awaiting_section: "Awaiting confirmation auctions"
+    ended_section: "Ended auctions"
+    canceled_section: "Canceled auctions"
   action:
     new: "New"
     create:
@@ -30,6 +37,8 @@ en:
       auction: "Edit Auction"
     set_awaiting_confirmation: "Change status to awaiting confirmation"
     set_confirmed: "Change status to confirmed"
+    set_validated: "Validate this auction"
+    set_canceled: "Cancel Auction"
     add_item: "Add an item"
   status_msg:
     auction:
@@ -39,6 +48,10 @@ en:
       set_awaiting: "The auction is now set as awaiting confirmation"
       set_confirmed: "The auction was set as confirmed"
       not_set_confirmed: "Could not change status to confirmed, because the admin is the same as the creater of the auction."
+      set_validated: "The Auction was validated successfully!"
+      set_canceled: "The Auction was canceled successfully!"
+      cannot_be_validated: "This auction does not meet criteria to be validated"
+      cannot_be_canceled: "This auction does not meet criteria to be canceled"
     general:
       updated_successfully: "Auction was updated sucessfully."
       update_failed: "Update failed, try again and check the fields below"
@@ -46,7 +59,9 @@ en:
       item_saved: "The item was added sucessfully!"
       item_not_saved: "Item not saved, check the errors!"
       auction_not_draft: "You cannot add a new item to this auction because it is past the draft phase."
+      auction_not_canceled: "You cannot change this item's auction because this auction is not canceled."
+      item_moved: "The item was moved to another auction successfully"
     bid:
-      bid_saved: "The bid was made sucessfully."
+      bid_saved: "The bid was made successfully."
       bid_not_save: "It was not possible to create the bid."
       if_admin: "Admin cannot place bids!"

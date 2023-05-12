@@ -1,5 +1,5 @@
 class AuctionLot < ApplicationRecord
-  enum status: {draft: 0, awaiting_confirmation: 1, confirmed: 2, running: 3, ended: 4}
+  enum status: {draft: 0, awaiting_confirmation: 1, confirmed: 2, running: 3, ended: 4, validated: 5, canceled: 6}
   validates :starting_time, :ending_time, :auction_code, :starting_bid, :bid_difference, presence: true
   validates :auction_code, uniqueness: true
   validate :code_validation
@@ -44,7 +44,7 @@ class AuctionLot < ApplicationRecord
       self.bids.order("offer DESC").first.user_id
     end
   end
-
+  
   def status_updater
     if self.status == "draft" 
       self.update(status: :awaiting_confirmation) 

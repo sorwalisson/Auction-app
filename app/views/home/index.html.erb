@@ -16,10 +16,28 @@
         <%end%>  
     </dl>
   <%end%>
-</div> 
+</div>
+
+<div id= "validated">
+  <h4><%= t('ended_auction')%></h4>
+  <%= @auctions.where(status: :validated).each do |auction| %>
+  <dl>
+      <dt><%= AuctionLot.human_attribute_name(:auction_code) %>:</dt>
+      <dd><%= link_to auction.auction_code, auction_lot_path(id: auction.id) %></dd>
+      <dt><%= AuctionLot.human_attribute_name(:ending_time) %>:</dt>
+      <dd><%= auction.ending_time %></dd>
+      <dt><%= AuctionLot.human_attribute_name(:highest_bid) %>:</dt>
+      <dd><%= if auction.highest_bid.present? then auction.highest_bid end%> <%= if auction.highest_bid.nil? then t(:no_bids_yet) end %></dt>
+      <dt><%= Item.model_name.human(:count => 2)%>:</dt>
+        <% auction.items.each do |item| %>
+          <dd><%= link_to item.name, auction_lot_item_path(auction_lot_id: auction.id, id: item.id) %></dt>
+        <%end%>  
+    </dl>
+  <%end%>
+</div>
 
 <div id="Upcoming Auctions">
-  <h4><%= t("upcoming_auctions")%></h4>
+  <h5><%= t("upcoming_auctions")%></h5>
   <%= @auctions.where(status: :confirmed).each do |auction| %>
     <dl>
       <dt><%= AuctionLot.human_attribute_name(:auction_code) %>:</dt>

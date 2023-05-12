@@ -20,7 +20,7 @@ describe 'user bids an auction' do
     end
 
     expect(current_path).to eq auction_lot_path(id: new_auction.id)
-    expect(page).to have_content "The bid was made sucessfully."
+    expect(page).to have_content "The bid was made successfully."
     expect(page).to have_content "Current highest bid: 10000"
     expect(page).to have_content "Number of bids received: 1"
   end

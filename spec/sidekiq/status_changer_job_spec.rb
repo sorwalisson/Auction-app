@@ -17,6 +17,7 @@ RSpec.describe StatusChangerJob, type: :job do
       
       expect(new_auction.status).to eq "confirmed"
       expect(StatusChangerJob.jobs.size).to eq 1
+      expect(StatusChangerJob).to have_enqueued_sidekiq_job(1).at(new_auction.starting_time)
     end
 
     it 'when auction is set to running, it must created a job and change status to running' do
@@ -33,6 +34,7 @@ RSpec.describe StatusChangerJob, type: :job do
 
       expect(new_auction.status).to eq ("running")
       expect(StatusChangerJob.jobs.size).to eq 1
-    end
+      expect(StatusChangerJob).to have_enqueued_sidekiq_job(1).at(new_auction.ending_time)
+    end 
   end
 end

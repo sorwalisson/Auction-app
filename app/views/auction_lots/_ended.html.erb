@@ -1,0 +1,38 @@
+<h2><%= AuctionLot.model_name.human %></h2>
+<dl>
+  <dt><%= AuctionLot.human_attribute_name(:auction_code) %>:</dt>
+  <dd><%= @auction_lot.auction_code %></dd>
+  <dt><%= AuctionLot.human_attribute_name(:starting_time) %>:</dt>
+  <dd><%= @auction_lot.starting_time %></dd>
+  <dt><%= AuctionLot.human_attribute_name(:ending_time) %>:</dt>
+  <dd><%= @auction_lot.ending_time %></dd>
+  <dt><%= AuctionLot.human_attribute_name(:starting_bid) %>:</dt>
+  <dd><%= @auction_lot.starting_bid %></dd>
+  <dt><%= AuctionLot.human_attribute_name(:bid_difference)%>:</dt>
+  <dd><%= @auction_lot.bid_difference %>%</dd>
+  <dt><%= AuctionLot.human_attribute_name(:status)%>:</dt>
+  <dd><%= @auction_lot.status %><dd>
+  <dt><%= AuctionLot.human_attribute_name(:bids_count)%>:</dt>
+  <dd><%= @auction_lot.bids.count %></dd>
+  <dt><%= AuctionLot.human_attribute_name(:winner_bid)%>:</dt>
+  <% if @auction_lot.bids.count != 0 %>
+    <dd><%= @auction_lot.highest_bid %><dd>
+  <%else%>
+    <dd><%= t('no_bids_placed')%></dd>
+  <%end%>
+  <dt><%= AuctionLot.human_attribute_name(:auction_winner)%>:</dt>
+  <% if @winner_user != nil %>
+    <dd><%= @winner_user.name %></dd>
+  <%else%>
+    <dd><%= t('no_winner') %></dd>
+  <%end%>
+
+  <% if @auction_lot.items.present? %>
+    <% @auction_lot.items.each do |item|%>
+      <dd><%= link_to item.name, auction_lot_item_path(auction_lot_id: @auction_lot, id: item.id) %></dd>
+    <%end%>
+  <%end%>
+</dl>
+<%= button_to t('action.set_validated'), validated_auction_lot_path, method: :post %>
+<%= button_to t('action.set_canceled'), canceled_auction_lot_path, method: :post %>
+<%= link_to "Home Page", root_path %>

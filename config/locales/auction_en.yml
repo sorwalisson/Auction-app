@@ -13,3 +13,5 @@ en:
         status: "Status"
         user_id: "Created by"
         bids_count: "Number of bids received"
+        winner_bid: "The winner offer was"
+        auction_winner: "The winner of this auction was"

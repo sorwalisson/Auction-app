@@ -1,8 +1,15 @@
+require 'pry'
 class AuctionLotsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :awaiting_confirmation, :confirmed]
-  before_action :authenticate_user_admin, only: [:new, :create, :edit, :update, :awaiting_confirmation, :confirmed]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :awaiting_confirmation, :confirmed, :validated]
+  before_action :authenticate_user_admin, only: [:new, :create, :edit, :update, :awaiting_confirmation, :confirmed, :validated]
   def show
     set_lot_and_verify
+    if @auction_lot.status == "ended" or @auction_lot.status == "validated"
+      @winner_user = User.find_by(id: @auction_lot.highest_bid_user)
+    end
+    if @auction_lot.status == "canceled"
+      @new_auctions = AuctionLot.all.where(status: :draft)
+    end
   end
   
   def new
@@ -14,7 +21,7 @@ class AuctionLotsController < ApplicationController
     @auction_lot.user_id = current_user.id
 
     if @auction_lot.save
-      redirect_to @auction_lot, notice: t("status_msg.auction.created")
+      redirect_to @auction_lot, notice: t("status_msg.auction.created") and return
     else
       flash.now[:notice] = t('status_msg.auction.creation_failed')
       render 'new'
@@ -29,7 +36,7 @@ class AuctionLotsController < ApplicationController
     set_lot_for_update
 
     if @auction_lot.update(auction_lot_params)
-      redirect_to @auction_lot, notice: t('status_msg.general.updated_successfully')
+      redirect_to @auction_lot, notice: t('status_msg.general.updated_successfully') and return
     else
       flash.now[:notice] = t('update_failed')
       render 'edit'
@@ -46,9 +53,30 @@ class AuctionLotsController < ApplicationController
     set_for_confirmed
     if current_user.id == @auction_lot.user_id
       redirect_to @auction_lot, notice: t('status_msg.auction.not_set_confirmed')
+      return
     else 
       @auction_lot.status_updater
       redirect_to @auction_lot, notice: t('status_msg.auction.set_confirmed')
+    end
+  end
+
+  def validated
+    @auction_lot = AuctionLot.find_by(id: params[:id])
+    if @auction_lot.status != "ended" or @auction_lot.bids.count == 0
+      redirect_to root_path, notice: t('status_msg.auction.cannot_be_validated') and return
+    else
+      @auction_lot.update(status: :validated)
+      redirect_to @auction_lot, notice: t('status_msg.auction.set_validated')
+    end
+  end
+
+  def canceled
+    @auction_lot = AuctionLot.find_by(id: params[:id])
+    if @auction_lot.status != "ended" or @auction_lot.bids.count != 0
+      redirect_to root_path, notice: t('status_msg.auction.cannot_be_canceled') and return
+    else
+      @auction_lot.update(status: :canceled)
+      redirect_to @auction_lot, notice: t('status_msg.auction.set_canceled')
     end
   end
 
@@ -59,7 +87,7 @@ class AuctionLotsController < ApplicationController
 
   def set_lot_and_verify
     @auction_lot = AuctionLot.find_by(id: params[:id])
-    if @auction_lot.status != "running" and @auction_lot.status != "ended" and @auction_lot.status != "confirmed" then authenticate_user_admin end
+    if @auction_lot.status != "running" and @auction_lot.status != "validated" and @auction_lot.status != "confirmed" then authenticate_user_admin end
     @auction_lot
   end
 
