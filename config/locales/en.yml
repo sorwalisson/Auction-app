@@ -6,6 +6,8 @@ en:
   hello_admin: "Hello Admin!"
   save: "Save"
   bid: "Bid Auction"
+  offer: "Offer Value"
+  acquired_items: "Acquired Items"
   signup_as:
     user: "Sign Up"
     errors:
@@ -29,6 +31,9 @@ en:
     awaiting_section: "Awaiting confirmation auctions"
     ended_section: "Ended auctions"
     canceled_section: "Canceled auctions"
+  user_menu:
+    won_auctions: "Won Auctions"
+    no_won_auctions: "You did not won any auctions yet!"
   action:
     new: "New"
     create:

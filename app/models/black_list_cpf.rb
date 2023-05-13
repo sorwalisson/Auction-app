@@ -1,0 +1,2 @@
+class BlackListCpf < ApplicationRecord
+end

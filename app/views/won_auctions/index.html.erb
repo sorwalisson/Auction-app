@@ -1,0 +1,16 @@
+<h2><%= t('user_menu.won_auctions')%></h2>
+<% if @won_auctions.empty? %>
+  <%= t('user_menu.no_won_auctions')%>
+<%else%>
+  <%= @won_auctions.each do |auction| %>
+    <dl>
+      <dt><%= AuctionLot.human_attribute_name(:auction_code) %>:</dt>
+      <dd><%= link_to auction.auction_code, auction_lot_path(id: auction.id) %></dd>
+      <dt><%= t('offer') %>:</dt>
+      <dd><%= auction.highest_bid %></dd>
+      <dt><%= t('acquired_items')%>:</dt>
+      <%= auction.items.each do |item| %>
+        <dd><%= link_to item.name, auction_lot_item_path(auction_lot_id: auction.id, id: item.id) %></dd>
+    <%end%>
+  <%end%>
+<%end%>

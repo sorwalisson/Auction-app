@@ -1,7 +1,9 @@
 class CpfValidator < ActiveModel::Validator
   
   def validate(record)
+    checklist = BlackListCpf.find_by(cpf: record.cpf)
     if record.cpf.length != 11 then record.errors.add(:cpf, "CPF must be 11 digits only") end
+    if checklist.present? then record.errors.add(:cpf, "Cannot be used to registration") end
     if record.cpf.length == 11
       if verify_cpf(record.cpf) == false then record.errors.add(:cpf, "must be valid") end
     end

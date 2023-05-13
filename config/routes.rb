@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get 'admin_menu', action: :admin_menu, controller: "home"
   
+  resources :won_auctions, only: :index
   resources :auction_lots, only: [:show, :new, :create, :show, :edit, :update] do
     resources :items, only: [:new, :create, :show] do
       post 'change_auction', on: :member
