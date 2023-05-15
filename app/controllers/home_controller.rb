@@ -9,4 +9,10 @@ class HomeController < ApplicationController
   def admin_menu
     @auctions = AuctionLot.all
   end
+
+  def favorites
+    @favorites = JSON.parse(current_user.favorites)
+    @auctions = Array.new
+    @favorites["auctions"].each {|auction| @auctions << AuctionLot.find_by(id: auction.to_i)}
+  end
 end

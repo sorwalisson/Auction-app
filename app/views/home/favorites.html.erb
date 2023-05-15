@@ -1,0 +1,21 @@
+<h2><%= t('user_menu.my_favorites') %> </h2>
+
+<% if @auctions.empty? %>
+  <strong><%= t('no_favorites') %></strong>
+<%else%>
+  <% @auctions.each do |auction| %>
+  <dl>
+    <dt><%= AuctionLot.human_attribute_name(:auction_code) %>:</dt>
+    <dd><%= link_to auction.auction_code, auction_lot_path(id: auction.id) %></dd>
+    <dt><%= AuctionLot.human_attribute_name(:starting_time) %>:</dt>
+    <dd><%= auction.starting_time %></dd>
+    <dt><%= AuctionLot.human_attribute_name(:ending_time) %>:</dt>
+    <dd><%= auction.ending_time %></dd>
+    <dt><%= AuctionLot.human_attribute_name(:starting_bid) %>:</dt>
+    <dd><%= auction.starting_bid %></dd>
+    <dt><%= Item.model_name.human %>:</dt>
+    <% auction.items.each do |item| %>
+      <dd><%= link_to item.name, auction_lot_item_path(auction_lot_id: auction.id, id: item.id) %></dd>
+    <%end%>
+  <%end%>
+<%end%>

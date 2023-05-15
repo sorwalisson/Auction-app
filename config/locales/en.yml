@@ -25,6 +25,9 @@ en:
   back_to_auction: "Go back to item's auction"
   item_move_msg: "Items from this auction can be transfered to a new auction, go to item's page to move them."
   no_item_found: "No results found"
+  add_favorite: "Add to your favorites!"
+  remove_favorite: "Remove from your favorites!"
+  no_favorites: "You don't have any favorite auctions"
   admin_menu: 
     title: "Admin Menu"
     create_section: 
@@ -37,6 +40,7 @@ en:
   user_menu:
     won_auctions: "Won Auctions"
     no_won_auctions: "You did not won any auctions yet!"
+    my_favorites: "My Favorites"
   action:
     new: "New"
     create:
@@ -76,3 +80,6 @@ en:
       bid_not_save: "It was not possible to create the bid."
       if_admin: "Admin cannot place bids!"
       if_suspended: "You cannot place bid, due to your account being suspended"
+    favorites:
+      added_favorite: "The auction was added to your favorites list"
+      removed_favorite: "The auction was removed from your favorites list"

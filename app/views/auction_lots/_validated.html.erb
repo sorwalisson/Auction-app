@@ -25,5 +25,11 @@
     <%end%>
   <%end%>
 </dl>
-
+<% if user_signed_in? %>
+  <% if current_user.verify_favorite(@auction_lot.id) == false %>
+    <%= button_to t('add_favorite'), auction_lot_favorites_path(auction_lot_id: @auction_lot.id), method: :post %>
+  <% else %>
+    <%= button_to t('remove_favorite'), auction_lot_favorites_path(auction_lot_id: @auction_lot.id), method: :delete %>
+  <%end%>
+<%end%>
 <%= link_to "Home Page", root_path %>

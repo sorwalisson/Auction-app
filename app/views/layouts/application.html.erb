@@ -22,6 +22,7 @@
             <%= "#{t('hello_admin')} #{current_user.description}"%> |
             <%= button_to t("log_out"), destroy_user_session_path, method: :delete %> 
           <%else%>
+            <%= link_to t('user_menu.my_favorites'), my_favorites_path %>
             <%= link_to t('user_menu.won_auctions'), won_auctions_path %>
             <%= "#{t('hello')} #{current_user.description}"%> |
             <%= button_to t("log_out"), destroy_user_session_path, method: :delete %>

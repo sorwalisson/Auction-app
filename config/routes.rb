@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {:sessions => "custom_sessions"}
   root to: 'home#index'
   get 'admin_menu', action: :admin_menu, controller: "home"
+  get 'my_favorites', action: :favorites, controller: "home"
   
   resources :won_auctions, only: :index
   resource :search, only: :show
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
     resources :items, only: [:new, :create, :show] do
       post 'change_auction', on: :member
     end
+    resource :favorites, only: [:create, :destroy]
     resources :bids, only: [:create]
     post 'awaiting_confirmation', on: :member
     post 'confirmed', on: :member
