@@ -1,6 +1,6 @@
 class BidsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
-  before_action :if_admin, only: [:create]
+  before_action :check_requirements, only: [:create]
   def create
     @auction_lot = AuctionLot.find_by(id: params[:auction_lot_id])
 
@@ -18,7 +18,8 @@ class BidsController < ApplicationController
 
   private
 
-  def if_admin
+  def check_requirements
     if current_user.admin? then redirect_to root_path, notice: t('status_msg.bid.if_admin') end
+    if current_user.cpf_checker == true then redirect_to root_path, notice: t('status_msg.bid.if_suspended') end
   end
 end

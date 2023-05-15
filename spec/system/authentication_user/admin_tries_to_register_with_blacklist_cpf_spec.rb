@@ -15,7 +15,7 @@ describe 'user tries to register with cpf that is on the blacklist' do
     fill_in "Address", with: "Rua alguma coisa, 15"
     click_on "Register"
 
-    expect(current_path).to eq root_path
-    expect(page).to have_content "You cannot register an account using this CPF"
+    expect(page).to have_content "CPF Cannot be used to registration"
+    expect(User.count).to eq 0
   end
 end

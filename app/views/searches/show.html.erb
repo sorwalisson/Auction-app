@@ -1,0 +1,15 @@
+<h2><%= t('search') %></h2>
+
+<% if @result != nil %>
+  <h3><%= t('number_of_results')%>: <%= @result.count %></h3>
+  <%= @result.each do |item| %>
+    <dl>
+      <dt><%= Item.human_attribute_name(:name)%>:</dt>
+      <dd><%= link_to item.name, auction_lot_item_path(auction_lot_id: item.auction_lot_id, id: item.id) %></dd>
+      <dt><%= AuctionLot.human_attribute_name(:auction_code) %>
+      <dd><%= link_to item.auction_lot.auction_code, auction_lot_path(id: item.auction_lot_id) %></dd>
+    </dl>
+  <%end%>
+<% else %>
+  <strong><%= t('no_item_found') %></strong>
+<%end%>

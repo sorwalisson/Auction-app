@@ -8,12 +8,14 @@ en:
   bid: "Bid Auction"
   offer: "Offer Value"
   acquired_items: "Acquired Items"
+  number_of_results: "Number of items found"
   signup_as:
     user: "Sign Up"
     errors:
       password_length: "The password must be at least 6 characters long"
     register: "Register"
   log_out: "Logout"
+  suspension_msg: "This account is suspended check your email for more details."
   running_auction: "Running Auctions"
   ended_auction: "Finished Auctions"
   no_bids_yet: "No one bid this lot yet"
@@ -22,6 +24,7 @@ en:
   auction_canceled: "This offer was canceled due to no bids"
   back_to_auction: "Go back to item's auction"
   item_move_msg: "Items from this auction can be transfered to a new auction, go to item's page to move them."
+  no_item_found: "No results found"
   admin_menu: 
     title: "Admin Menu"
     create_section: 
@@ -45,6 +48,8 @@ en:
     set_validated: "Validate this auction"
     set_canceled: "Cancel Auction"
     add_item: "Add an item"
+    search: "Looking for"
+    do_search: "Search"
   status_msg:
     auction:
       created: "The new auction was created sucessfully!"
@@ -70,3 +75,4 @@ en:
       bid_saved: "The bid was made successfully."
       bid_not_save: "It was not possible to create the bid."
       if_admin: "Admin cannot place bids!"
+      if_suspended: "You cannot place bid, due to your account being suspended"

@@ -22,4 +22,10 @@ class User < ApplicationRecord
   def full_description
     "#{self.name} - #{self.email}"
   end
+
+  def cpf_checker
+    block = BlackListCpf.find_by(cpf: self.cpf)
+    if block.present? then return true end
+    return false
+  end
 end
