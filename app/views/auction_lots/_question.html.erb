@@ -1,0 +1,47 @@
+<div id="questions">
+  <h4><%=Question.model_name.human %></h4>
+  <% @auction_lot.questions.where(visible: true).each do |question| %>
+    <div id = "question<%="#{question.id}"%>">
+      <dl>
+        <dt><%= Question.human_attribute_name(:user_id)%>:</dt>
+        <dd><%= question.user.name %>:</dd>
+        <dt><%= Question.human_attribute_name(:message)%>:</dt>
+        <dd><%= question.message %></dd>
+        <%if user_signed_in? and current_user.admin? %>
+          <%= button_to t('action.set_visible_false'), visible_false_auction_lot_question_path(auction_lot_id: @auction_lot.id), method: :post %>
+        <%end%>
+      </dl>
+    </div>
+      <div id = "answerq<%="#{question.id}"%>">
+        <% if question.answer.present? %>
+          <dl>
+            <dt><%= Answer.human_attribute_name(:user_id)%>:</dt>
+            <dd><%= question.answer.user.name %>:</dd>
+            <dt><%= Answer.human_attribute_name(:message)%>:</dt>
+            <dd><%= question.answer.message %></dd>
+          </dl>
+        <%else%>
+          <% if user_signed_in? and current_user.admin? %>
+            <%= form_with(url: "/auction_lots/#{@auction_lot.id}/questions/#{question.id}/answers") do |f| %>
+              <%= f.label :message, Answer.human_attribute_name(:message) %>
+              <%= f.text_area :message, :cols => 10, :rows => 5 %>
+              <%= f.submit t('send') %>
+            <%end%>
+          <%else%>
+            <%= t('status_msg.answer.no_reply') %>
+          <%end%>
+      </div>
+      <%end%>
+  <%end%>
+</div>
+<div id = "new_question">
+  <%if user_signed_in? %>
+    <%= form_with(url: "/auction_lots/#{@auction_lot.id}/questions") do |f| %>
+      <%= f.label :message, t('action.message') %>
+      <%= f.text_area :message, :cols => 10, :rows => 5 %>
+      <%= f.submit t('send') %>
+    <%end%>
+  <%else%>
+    <%= t('status_msg.question.log_in') %>
+  <%end%>
+</div>

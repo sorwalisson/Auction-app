@@ -9,6 +9,7 @@ en:
   offer: "Offer Value"
   acquired_items: "Acquired Items"
   number_of_results: "Number of items found"
+  send: "Send"
   signup_as:
     user: "Sign Up"
     errors:
@@ -54,6 +55,8 @@ en:
     add_item: "Add an item"
     search: "Looking for"
     do_search: "Search"
+    message: "Question"
+    set_visible_false: "Mark this Question as invisible."
   status_msg:
     auction:
       created: "The new auction was created sucessfully!"
@@ -83,3 +86,11 @@ en:
     favorites:
       added_favorite: "The auction was added to your favorites list"
       removed_favorite: "The auction was removed from your favorites list"
+    question:
+      question_added: "The Question was added successfully!"
+      question_not_added: "Check the message and try sending question again!"
+      log_in: "Please, log in first before post a question!"
+      set_invisible: "The Question was marked as invisible!"
+    answer:
+      answer_added: "Answer was posted successfully."
+      no_reply: "There is not reply yet, wait till an admin answer your question!"

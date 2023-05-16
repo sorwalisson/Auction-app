@@ -1,0 +1,6 @@
+<% require "pry" %>
+<%= form_with(url: "/auction_lots/#{@auction_lot.id}/questions/#{question.id}/answers") do |f| %>
+  <%= f.label :message %>
+  <%= f.text_area :message, :cols => 10, :rows => 5 %>
+  <%= f.submit t('send') %>
+<%end%>

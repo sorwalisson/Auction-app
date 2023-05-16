@@ -10,6 +10,7 @@ class User < ApplicationRecord
   validates_with ZipValidator
   validate :set_admin_or_user
   has_many :auction_lots
+  has_many :questions
 
 
   def set_admin_or_user

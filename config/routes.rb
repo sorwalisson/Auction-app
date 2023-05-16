@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     resources :items, only: [:new, :create, :show] do
       post 'change_auction', on: :member
     end
+    resources :questions, only: [:create] do
+      resources :answers, only: [:create]
+      post 'visible_false', on: :member
+    end
     resource :favorites, only: [:create, :destroy]
     resources :bids, only: [:create]
     post 'awaiting_confirmation', on: :member

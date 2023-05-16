@@ -26,5 +26,6 @@
     <%= button_to t('remove_favorite'), auction_lot_favorites_path(auction_lot_id: @auction_lot.id), method: :delete %>
   <%end%>
 <%end%>
+<%= render "question" %>
 <%= link_to "Home Page", root_path %>
 <%= link_to t('admin_menu.title'), admin_menu_path %>

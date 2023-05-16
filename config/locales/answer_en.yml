@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      answer: "Answer"
+    attributes:
+      answer:
+        user_id: "User"
+        message: "Answer"
+        question_id: "Question"
