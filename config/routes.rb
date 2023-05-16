@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'admin_menu', action: :admin_menu, controller: "home"
   get 'my_favorites', action: :favorites, controller: "home"
   
+  resources :black_list_cpfs, only: :create
   resources :won_auctions, only: :index
   resource :search, only: :show
   resources :auction_lots, only: [:show, :new, :create, :show, :edit, :update] do

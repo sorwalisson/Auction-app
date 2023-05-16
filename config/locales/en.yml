@@ -10,6 +10,7 @@ en:
   acquired_items: "Acquired Items"
   number_of_results: "Number of items found"
   send: "Send"
+  blockcpf: "Block CPF"
   signup_as:
     user: "Sign Up"
     errors:
@@ -94,3 +95,5 @@ en:
     answer:
       answer_added: "Answer was posted successfully."
       no_reply: "There is not reply yet, wait till an admin answer your question!"
+    block_cpf:
+      cpf_blocked: "The CPF was added to the blocklist successfully!"

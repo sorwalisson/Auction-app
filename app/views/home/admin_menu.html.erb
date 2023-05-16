@@ -58,3 +58,10 @@
     <%end%>
   </div>
 </div>
+<div id= "blockcpf">
+  <%= form_with(url: "/black_list_cpfs") do |f| %>
+    <%= f.label :blockcpf, t('blockcpf') %>
+    <%= f.text_field :blockcpf %>
+    <%= f.submit t('send') %>
+  <%end%>
+</div>
