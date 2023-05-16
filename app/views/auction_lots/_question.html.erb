@@ -3,10 +3,8 @@
   <% @auction_lot.questions.where(visible: true).each do |question| %>
     <div id = "question<%="#{question.id}"%>">
       <dl>
-        <dt><%= Question.human_attribute_name(:user_id)%>:</dt>
-        <dd><%= question.user.name %>:</dd>
-        <dt><%= Question.human_attribute_name(:message)%>:</dt>
-        <dd><%= question.message %></dd>
+        <dt><%= Question.human_attribute_name(:user_id)%>: <%= question.user.name %></dt>
+        <dd><%= Question.human_attribute_name(:message)%>: <%= question.message %></dd>
         <%if user_signed_in? and current_user.admin? %>
           <%= button_to t('action.set_visible_false'), visible_false_auction_lot_question_path(auction_lot_id: @auction_lot.id), method: :post %>
         <%end%>
@@ -15,10 +13,8 @@
       <div id = "answerq<%="#{question.id}"%>">
         <% if question.answer.present? %>
           <dl>
-            <dt><%= Answer.human_attribute_name(:user_id)%>:</dt>
-            <dd><%= question.answer.user.name %>:</dd>
-            <dt><%= Answer.human_attribute_name(:message)%>:</dt>
-            <dd><%= question.answer.message %></dd>
+            <dt> Admin: <%= question.answer.user.name %> </dt>
+            <dd><%= Answer.human_attribute_name(:message)%>: <%= question.answer.message %></dd>
           </dl>
         <%else%>
           <% if user_signed_in? and current_user.admin? %>
@@ -35,13 +31,14 @@
   <%end%>
 </div>
 <div id = "new_question">
-  <%if user_signed_in? %>
+  <%if user_signed_in? && current_user.admin? == false %>
     <%= form_with(url: "/auction_lots/#{@auction_lot.id}/questions") do |f| %>
       <%= f.label :message, t('action.message') %>
       <%= f.text_area :message, :cols => 10, :rows => 5 %>
       <%= f.submit t('send') %>
     <%end%>
-  <%else%>
+  <%end%>
+  <% if user_signed_in? == false %>
     <%= t('status_msg.question.log_in') %>
   <%end%>
 </div>

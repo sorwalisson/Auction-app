@@ -13,14 +13,15 @@
       <dt><%= Item.model_name.human(:count => 2)%>:</dt>
         <% auction.items.each do |item| %>
           <dd><%= link_to item.name, auction_lot_item_path(auction_lot_id: auction.id, id: item.id) %></dt>
-        <%end%>  
+        <%end%>
+      <p>_____________________________________________________________________________________________________ </p>   
     </dl>
   <%end%>
 </div>
 
 <div id= "validated">
   <h4><%= t('ended_auction')%></h4>
-  <%= @auctions.where(status: :validated).each do |auction| %>
+  <% @auctions.where(status: :validated).each do |auction| %>
   <dl>
       <dt><%= AuctionLot.human_attribute_name(:auction_code) %>:</dt>
       <dd><%= link_to auction.auction_code, auction_lot_path(id: auction.id) %></dd>
@@ -31,14 +32,15 @@
       <dt><%= Item.model_name.human(:count => 2)%>:</dt>
         <% auction.items.each do |item| %>
           <dd><%= link_to item.name, auction_lot_item_path(auction_lot_id: auction.id, id: item.id) %></dt>
-        <%end%>  
+        <%end%>
+      <p>_____________________________________________________________________________________________________ </p>    
     </dl>
   <%end%>
 </div>
 
 <div id="Upcoming Auctions">
   <h5><%= t("upcoming_auctions")%></h5>
-  <%= @auctions.where(status: :confirmed).each do |auction| %>
+  <% @auctions.where(status: :confirmed).each do |auction| %>
     <dl>
       <dt><%= AuctionLot.human_attribute_name(:auction_code) %>:</dt>
       <dd><%= link_to auction.auction_code, auction_lot_path(id: auction.id) %></dd>
@@ -50,8 +52,9 @@
       <dd><%= auction.starting_bid%></dd>
       <dt><%= Item.model_name.human(:count => 2)%>:</dt>
         <% auction.items.each do |item| %>
-          <dd><%= link_to item.name, auction_lot_item_path(auction_lot_id: auction.id, id: item.id) %></dt>
-        <%end%>  
+          <dd><%= link_to item.name, auction_lot_item_path(auction_lot_id: auction.id, id: item.id) %></dd>
+        <%end%>
+      <p>_____________________________________________________________________________________________________ </p>  
     </dl>
   <%end%>
 </div>
