@@ -37,11 +37,22 @@ A seed irá conter 2 usuários admins e 2 usuários regulares:<br/>
 **Admins:**<br/>
 - **Nome:** AdminMaster, **Email:** adminmaster@leilaodogalpao.com.br, **Password:** password<br/>
 - **Nome:** AdminSecond, **Email:** adminsecond@leilaodogalpao.com.br, **Password:** password<br/>
+
 **Usuários:**<br/>
 - **Nome:** FirstUser, **Email:** firstuser@email.com.br, **Password:** password<br/>
 - **Nome:** SecondUser, **Email:** seconduser@email.com.br, **Password:** password<br/>
 
-__________________________________________________________________________________________________________</br>
+### Regras de Negócios utilizadas:<br/>
+**Users:**
+  - Usuários tem um atributo boolean que determina se ele é admin ou não:<br/>
+    - Ou seja se User.admin? == true usuário é admin!<br/>
+  - Usuários Admins não podem postar bids em Auctions!<br/>
+  - Somente Admins tem acesso ao Admin Menu<br/>
+  - Somente Admins pode bloquear um CPF<br/>
+  - Como solicitado pelo TreinaDev uma Auction so pode ser confirmada por um Admin diferente do qual criou a Auction<br/>
+  - Usuários padrão podem adicionar ou remover favoritos<br/>
+  - Usuários padrão só podem postar bids em Auction com Status `:Running` <br/>
+
 
 
 
