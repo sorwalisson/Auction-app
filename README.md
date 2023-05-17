@@ -51,7 +51,33 @@ A seed irá conter 2 usuários admins e 2 usuários regulares:<br/>
   - Somente Admins pode bloquear um CPF<br/>
   - Como solicitado pelo TreinaDev uma Auction so pode ser confirmada por um Admin diferente do qual criou a Auction<br/>
   - Usuários padrão podem adicionar ou remover favoritos<br/>
-  - Usuários padrão só podem postar bids em Auction com Status `:Running` <br/>
+  - Usuários padrão só podem postar bids em Auction com Status `:Running`<br/>
+  - Usuários tem acesso as páginas My Favorites e Won Auctions<br/>
+
+**Auctions:**
+  - Auctions possuem `Status:` que são `:draft`, `:awaiting_confirmation`, `:confirmed`, `:running`, `:ended`, `:validated`, `:canceld`</br>
+  
+  - `:draft` Auctions:<br/>
+    - Durante o status de `:draft` é possível editar a auction e adicionar items a auction, não sendo possível quaisquer modificações a mesma depois que ela vai para confirmação, além disso so Administradores tem acesso a Auction nesse estado.<br/>
+    - Uma vez que a fase de `:draft` seja concluída o admin pode mandar ela para `:awaiting_confirmation` clickando no botão na pagina da auction.<br/>
+  
+  - `:awaiting_confirmation` Auctions:<br/>
+    - Nessa etapa outro Administrador que não seja o mesmo que tenha criado a auction, confirma as informações e autoriza a realização da auction.<br/>
+    - Quando o Administrador clickar no botão de confirmar Auction automaticamente será adicionado um Job a fila do sidekiq para executar um methodo no horário do `:starting_time`<br/>
+
+  - `:confirmed` Auctions:<br/>
+    - Esse é o primeiro momento em que a auction fica disponível para os usuários comuns a visualizem, assim podendo vêr detalhes da mesma, podendo até mesmo favorita-las.
+    - A partir do momento em que o Job do sidekiq inicie a Auction ela será atualizada para `:running`.<br/>
+
+  - `:running` Auctions: <br/>
+    - A partir do momento em que o Sidekiq atualiza um Auction para `:running` ele ja adiciona automaticamente um Job para ser executado no data e hora do atributo `:ending_time`. <br/>
+    - A partir daqui os usuários poderão dar lances as auctions "Bids".<br/>
+    - Como falado anteriormente Administradores não podem "Bidar" Auctions.<br/>
+    - O usuário que ja possui o maior lance não pode "Bidar" novamente, até que outro usuário cubra o seu lance.<br/>
+    - Cada Auction tem um valor mínimo adicional de "Bids" que é mostrado pelo atributo `:bid_difference` que é expresso em porcentagem, ou seja se o maior "Bid" atual for de 5000 e o `:bid_difference` for de 20 o proxímo "Bid" tem que ser composto por 5000 + 20% de 5000 ou seja valor mínimo de 6000.<br/>
+    - O usuário tem que estar logado para efetuar Bids<br/>
+
+  
 
 
 
