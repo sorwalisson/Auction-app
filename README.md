@@ -1,4 +1,4 @@
-# Walisson Santos Auction App<br/>Senhos a um lance de distância
+# Walisson Santos Auction App<br/>Sonhos a um lance de distância
 
 <image src="https://img.shields.io/github/languages/top/sorwalisson/Auction-app">
 
@@ -111,7 +111,7 @@ A seed irá conter 2 usuários admins e 2 usuários regulares:<br/>
 
   **Bloqueador de CPF:**<br/>
 
-  - O bloqueador de CPF utiliza um model chamado BlackListCpf, :warning: `:Eu utulizei essa nomeclatura e depois meio que me arrependi, pretendo muda-la depois que o projeto for para avaliação`.<br/>
+  - O bloqueador de CPF utiliza um model chamado BlackListCpf, :warning: `:Eu utilizei essa nomeclatura e depois meio que me arrependi, pretendo muda-la depois que o projeto for para avaliação`.<br/>
   - Um Administrador pode ir até o Admin Menu e preencher o formulário com o CPF o qual deseja bloquear.<br/>
   - Usuários que tentarem se cadastrar com um CPF bloqueador serão impedidos.<br/>
   - Usuários cadastrados e que porventura tem a conta vinculada a um CPF bloqueado, serão informados e impedidos de participarem de leilões e postar dúvidas.<br/>
