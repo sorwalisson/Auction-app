@@ -8,35 +8,62 @@
 
     <%= stylesheet_link_tag "application" %>
   </head>
-
   <body>
     <header>
-      <%= link_to root_path do %>
-        <h1><%= t(:appname) %> </h1>
-      <%end%>
-      <strong><%= t(:apptitle)%></strong>
-      <nav id="main_nav">
-        <% if user_signed_in? %>
-          <% if current_user.admin? %>
-            <%= link_to t('admin_menu.title'), admin_menu_path %>
-            <%= "#{t('hello_admin')} #{current_user.description}"%> |
-            <%= button_to t("log_out"), destroy_user_session_path, method: :delete %> 
-          <%else%>
-            <%= link_to t('user_menu.my_favorites'), my_favorites_path %>
-            <%= link_to t('user_menu.won_auctions'), won_auctions_path %>
-            <%= "#{t('hello')} #{current_user.description}"%> |
-            <%= button_to t("log_out"), destroy_user_session_path, method: :delete %>
-          <%end%> 
-        <%else%>
-          <%= link_to t("signup_as.user"), new_user_registration_path %> |
-          <%= link_to t("sign_in"), new_user_session_path %>
-        <%end%>
-        <%= form_with(url: search_path, method: :get) do |f| %>
-          <%= f.label :query, t('action.search')%>
-          <%= f.text_field :query %>
-          <%= f.submit t('action.do_search') %>
-        <%end%>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/"><%= t(:appname) %></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <%if user_signed_in? && current_user.admin? %>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/admin_menu"><%= t('admin_menu.title') %></a>
+                </li>
+                <li>
+                  <span class="navbar-text p-2 py-5">
+                    <%= "#{t('hello_admin')} #{current_user.description}"%>
+                  </span>
+                </li>
+                  <%= button_to t("log_out"), destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
+                </li>
+              <%end%>
+              <%if user_signed_in? && current_user.admin == false %>
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/my_favorites"><%= t('user_menu.my_favorites') %></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/won_auctions"><%=t('user_menu.won_auctions')%></a>
+                  </li>
+                  <li class="nav-item">
+                    <span class="navbar-text p-2">
+                      <%= "#{t('hello')} #{current_user.description}"%>
+                    </span>
+                  </li>
+                </ul>
+                  <%= button_to t("log_out"), destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
+                </li>
+              <%end%>
+              <%if user_signed_in? == false %>
+                <li class="nav-item">
+                  <a class="nav-link active" href="/users/sign_in"><%=t("sign_in")%></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="/users/sign_up"><%=t("signup_as.user")%></a>
+                </li>
+              <%end%>
+            </ul>
+            <%= form_with(url: search_path, method: :get) do |f| %>
+              <%= f.text_field :query, class: "form-control me-2", placeholder: "Search"%>
+              <%= f.submit t('action.do_search'), class: "btn btn-outline-success"%>
+            <%end%>
+          </div>
+        </div>
       </nav>
+      <h2><%= t(:welcome)%></h2>
     </header>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

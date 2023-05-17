@@ -14,7 +14,7 @@ describe 'user uses the search' do
 
       login_as(new_user)
       visit root_path
-      fill_in 'Looking for', with: "#{new_auction.auction_code}"
+      fill_in 'Search', with: "#{new_auction.auction_code}"
       click_on 'Search'
 
       expect(current_path).to eq auction_lot_path(id: new_auction.id)
@@ -31,7 +31,7 @@ describe 'user uses the search' do
 
       login_as(new_user)
       visit root_path
-      fill_in 'Looking for', with: "#{new_auction.auction_code}"
+      fill_in 'Search', with: "#{new_auction.auction_code}"
       click_on 'Search'
 
       expect(page).to have_content "No results found"
@@ -57,7 +57,7 @@ describe 'user uses the search' do
 
       login_as(new_user)
       visit root_path
-      fill_in 'Looking for', with: "#{new_product.item_code}"
+      fill_in 'Search', with: "#{new_product.item_code}"
       click_on 'Search'
 
       expect(current_path).to eq auction_lot_item_path(auction_lot_id: new_auction.id, id: new_product.id)
@@ -81,7 +81,7 @@ describe 'user uses the search' do
 
       login_as(new_user)
       visit root_path
-      fill_in 'Looking for', with: "Ryzen"
+      fill_in 'Search', with: "Ryzen"
       click_on 'Search'
 
       expect(current_path).to eq auction_lot_item_path(auction_lot_id: new_auction.id, id: new_product.id)
@@ -108,7 +108,7 @@ describe 'user uses the search' do
 
       login_as(new_user)
       visit root_path
-      fill_in 'Looking for', with: "Ryzen"
+      fill_in 'Search', with: "Ryzen"
       click_on 'Search'
 
       expect(current_path).to eq search_path
@@ -129,7 +129,7 @@ describe 'user uses the search' do
 
       login_as(new_user)
       visit root_path
-      fill_in 'Looking for', with: "#{new_auction.auction_code}"
+      fill_in 'Search', with: "#{new_auction.auction_code}"
       click_on 'Search'
 
       expect(page).to have_content "No results found"

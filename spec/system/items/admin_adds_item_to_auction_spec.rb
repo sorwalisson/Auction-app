@@ -24,9 +24,6 @@ describe 'admin tries to add a new item to an auction' do
     click_on "Save"
 
     expect(page).to have_content "The item was added sucessfully!"
-    within('h2') do
-      expect(page).to have_content "Item"
-    end
     expect(page).to have_content "Name: Ryzen 7 5800x"
     expect(page).to have_content "Description: Ryzen 7 5800x, A 3.8GHz processor with 8 cores with the new AMD technology AMD 3D V-Cache and Zen 3 architecture."
     expect(page).to have_content "Dimensions: 3cm x 8cm x 3cm"
