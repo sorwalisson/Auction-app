@@ -140,10 +140,10 @@ Primeiramente queria agradecer ao pessoal da TreinaDev pela oportunidade e pelos
 Sei que ainda tenho trabalho a fazer nesse projetos e em outros que estão no meu Github, mas cada nova ferramente aprendida e cada boa prática assimalada são passos indispensáveis para a formação de um novo dev.<br/>
 
 Além do pessoal do TreinaDev / CampusCode fica aqui também meus agradecimentos aos meus queridíssemos amigos:<br/>
-**Ricardo Silva**<br/>
+[**Ricardo Silva**](https://www.linkedin.com/in/ricardobsilva13/)<br/>
   - Foi ele quem me apresentou RoR e que me guiou nos meus primeiros passos na linguagem Ruby e que me incentivou.<br/>
 
-**João Henrique de Souza**<br/>
+[**João Henrique de Souza**](https://www.linkedin.com/in/jo%C3%A3o-henrique-de-souza-5523214b/)<br/>
   - Apesar de ele não ser da área dev Rails, ele me ajudou muito me ensinando várias coisas de Terminal, Postgresql e afins.<br/>
 
 Apesar de eles não terem participados deste projeto, sei que o conhecimento que eles me passaram lá atrás me ajudaram a superar desáfios e continuaram e me ser úteis em quanto eu for DEV.
