@@ -65,7 +65,9 @@ class AuctionLot < ApplicationRecord
       return
     end
     if self.status == "running" 
-      self.update(status: :ended) 
+      self.update(status: :ended)
+      self.save
+      return
     end
   end
 end

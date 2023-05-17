@@ -43,18 +43,20 @@ A seed irá conter 2 usuários admins e 2 usuários regulares:<br/>
 - **Nome:** SecondUser, **Email:** seconduser@email.com.br, **Password:** password<br/>
 
 ### Regras de Negócios utilizadas:<br/>
-**Users:**
+**Users:**<br/>
   - Usuários tem um atributo boolean que determina se ele é admin ou não:<br/>
     - Ou seja se User.admin? == true usuário é admin!<br/>
   - Usuários Admins não podem postar bids em Auctions!<br/>
   - Somente Admins tem acesso ao Admin Menu<br/>
+    - Ações de validações e confirmações podem ser feitas nesse menu.<br/>
+    - Bem como cancelar CPFs<br/>
   - Somente Admins pode bloquear um CPF<br/>
   - Como solicitado pelo TreinaDev uma Auction so pode ser confirmada por um Admin diferente do qual criou a Auction<br/>
   - Usuários padrão podem adicionar ou remover favoritos<br/>
   - Usuários padrão só podem postar bids em Auction com Status `:Running`<br/>
   - Usuários tem acesso as páginas My Favorites e Won Auctions<br/>
 
-**Auctions:**
+**Auctions:**<br/>
   - Auctions possuem `Status:` que são `:draft`, `:awaiting_confirmation`, `:confirmed`, `:running`, `:ended`, `:validated`, `:canceld`</br>
   
   - `:draft` Auctions:<br/>
@@ -63,7 +65,7 @@ A seed irá conter 2 usuários admins e 2 usuários regulares:<br/>
   
   - `:awaiting_confirmation` Auctions:<br/>
     - Nessa etapa outro Administrador que não seja o mesmo que tenha criado a auction, confirma as informações e autoriza a realização da auction.<br/>
-    - Quando o Administrador clickar no botão de confirmar Auction automaticamente será adicionado um Job a fila do sidekiq para executar um methodo no horário do `:starting_time`<br/>
+    - Quando o Administrador clickar no botão de confirmar Auction automaticamente será adicionado um Job a fila do sidekiq para executar um methodo no horário do `:starting_time` e este metodo muda o status da auction para `:running`<br/>
 
   - `:confirmed` Auctions:<br/>
     - Esse é o primeiro momento em que a auction fica disponível para os usuários comuns a visualizem, assim podendo vêr detalhes da mesma, podendo até mesmo favorita-las.
@@ -76,6 +78,84 @@ A seed irá conter 2 usuários admins e 2 usuários regulares:<br/>
     - O usuário que ja possui o maior lance não pode "Bidar" novamente, até que outro usuário cubra o seu lance.<br/>
     - Cada Auction tem um valor mínimo adicional de "Bids" que é mostrado pelo atributo `:bid_difference` que é expresso em porcentagem, ou seja se o maior "Bid" atual for de 5000 e o `:bid_difference` for de 20 o proxímo "Bid" tem que ser composto por 5000 + 20% de 5000 ou seja valor mínimo de 6000.<br/>
     - O usuário tem que estar logado para efetuar Bids<br/>
+    - Por fim o sidekiq executa o Job agendado para mudar o `status:` para `:ended`.<br/>
+
+  - `:ended` Auctions:<br/>
+    - Esta etapa é para um administrador verificar se houveram "Bids".<br/>
+    - Se um administrador verificou que houve ao menos um "Bid" esse valida a auction clickando no botão para mudar `status:` para `:validated` e assim o usuário consegue vê na sua página de Won Auctions que ele Adquiriu o lot.<br/>
+    - Durante a fase `:ended` os usuários não conseguem ter acesso ao lote.<br/>
+    - Se não houve nenhum "Bid" o administrador clicka no botão para cancelar o lot mudando o seu `status:` para `:canceled`.<br/>
+    - Pensei em tornar o processo de validação e cancelamento automatizado, mas como o projeto pediu para que um administrador o fizesse então deixe esse processo de forma manual.
+  
+  - `:validated` Auctions:<br/>
+    - Nesta etapa a auction fica vísivel para os usuários aferirem os resultados.<br/>
+    - Neste etapa a auction pode ser acessada também pelo vencedor atráves da página Won Auctions.<br/>
+
+  - `:canceled` Auctions:<br/>
+    - Quando uma Auction é cancelada os administradores podem migrar os itens nela cadastrados para outras Auctions desde que essa Auction destino tenha o `status:``:draft`<br/>
+    - A partir daqui os usuários comuns não tem mais acesso a Auction, so os administradores atráves do Admin Menu.<br/>
+
+  **Items:**<br/>
+    - Os itens podem ser criados atráves de um link na página de uma Auction que tenha o `status:``:draft`.<br/>
+    - Itens de Auctions canceladas podem ser transferido desde que a Auction siga o critério supracitado.<br/>
+    - Todos os atributos são obrigatórios exceto a `:photo`.<br/>
+
+  **Bid:**<br/>
+    - "Bids" so podem ser feitas em `:running` Auctions.<br/>
+    - A primeira "Bid" tem que ser >= do que `Auction.starting_bid`<br/>
+    - Bids subsequentes precisam ser >= do que `Auction.new_bid_value`<br/>
+    - Usuários que ja possuem a maior "bid", dar outro lance até que outro usuário dê um lance maior do que o atual. <br/>
+    - Administradores não podem dar "Bids" em quaisquer Auction.<br/>
+
+## Funções Adicionais:<br/>
+
+  **Bloqueador de CPF:**<br/>
+
+  - O bloqueador de CPF utiliza um model chamado BlackListCpf, :warning: `:Eu utulizei essa nomeclatura e depois meio que me arrependi, pretendo muda-la depois que o projeto for para avaliação`.<br/>
+  - Um Administrador pode ir até o Admin Menu e preencher o formulário com o CPF o qual deseja bloquear.<br/>
+  - Usuários que tentarem se cadastrar com um CPF bloqueador serão impedidos.<br/>
+  - Usuários cadastrados e que porventura tem a conta vinculada a um CPF bloqueado, serão informados e impedidos de participarem de leilões e postar dúvidas.<br/>
+
+  **Search:**<br/>
+    - Um usuário pode usar o metodo de buscar que fica localizado na 'nav-bar' para pesquisar por Itens ou Auctions.<br/>
+    - Se um usuário pesquisar digitando um código completo de uma Auction ele será redirecionado diretamente para a pagina da auction, desde que mesma esteja vísivel para usuários comuns.<br/>
+    - Se um usuário pesquisar digitando um código completo de um item ele será direcionado automaticamente para a página do item, desde que o mesmo pertença a uma Auction que esteja visível a usuários comuns.<br/>
+    - Se um usuário usar um fragmento de texto, este será direcionado a uma tela em que mostra os resultados, que serão possíveis itens que possuam o fragmento de texto no nome.<br/>
+  
+  **Questions and Answer**</br>
+    - Usuários podem enviar perguntas sobre um lote na página do mesmo, lembro que usuários comuns só podem acessar lotes com determinados `status:`.<br/>
+    - Somente administradores podem responder essas perguntas, e o mesmo deve fazer acessando a página do lote.<br/>
+    - Um administrador pode ocultar uma pergunta se julga-la ofensiva ou que quebre as regras do site, e só basta um click de botão para tal. <br/>
+    - Cada pergunta só pode ter uma resposta, mas um usuário pode colocar quantas perguntas ele desejar.<br/>
+
+  
+  **Favoritos:**<br/>
+    - Um usuário pode clickar no botão "Adicionar aos favoritos" para adicionar um lote a sua lista de favoritos.<br/>
+    - E o mesmo pode remover um lote de sua lista de favorites, clickando para remover de sua lista.<br/>
+
+
+## Considerações Finais:
+
+Primeiramente queria agradecer ao pessoal da TreinaDev pela oportunidade e pelos conteúdos disponibilizados no site, e pela bússola que é o projeto TreinaDev. Tem sido uma jornada intensa e valiosa de aprendizados e conquistas.<br/>
+Sei que ainda tenho trabalho a fazer nesse projetos e em outros que estão no meu Github, mas cada nova ferramente aprendida e cada boa prática assimalada são passos indispensáveis para a formação de um novo dev.<br/>
+
+Além do pessoal do TreinaDev / CampusCode fica aqui também meus agradecimentos aos meus queridíssemos amigos:<br/>
+**Ricardo Silva**<br/>
+  - Foi ele quem me apresentou RoR e que me guiou nos meus primeiros passos na linguagem Ruby e que me incentivou.<br/>
+
+**João Henrique de Souza**<br/>
+  - Apesar de ele não ser da área dev Rails, ele me ajudou muito me ensinando várias coisas de Terminal, Postgresql e afins.<br/>
+
+Apesar de eles não terem participados deste projeto, sei que o conhecimento que eles me passaram lá atrás me ajudaram a superar desáfios e continuaram e me ser úteis em quanto eu for DEV.
+
+Obrigado e fico no aguardo do FeedBack.
+
+
+
+    
+  
+
+
 
   
 
