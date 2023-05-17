@@ -3,9 +3,10 @@
 <image src="https://img.shields.io/github/languages/top/sorwalisson/Auction-app">
 
 ## Descrição: Este é um projeto com a finalidade de estudos e demonstração das minhas habilidades atuais como dev, além de uma ferramente de melhoria para minhas habilidades de desenvolvedor Rails.
-Ruby Version: <image src="https://img.shields.io/badge/Ruby-3.1.2-green"><br/>
-Rails Version: <image src= "https://img.shields.io/badge/Rails-7.0.4.3-green"><br/>
-Project Size: <image src="https://img.shields.io/github/repo-size/sorwalisson/Auction-app?style=for-the-badge"><br/>
+- Ruby Version: <image src="https://img.shields.io/badge/Ruby-3.1.2-green"><br/>
+- Rails Version: <image src= "https://img.shields.io/badge/Rails-7.0.4.3-green"><br/>
+- Project Size: <image src="https://img.shields.io/github/repo-size/sorwalisson/Auction-app?style=for-the-badge"><br/>
+- > Status do Projeto: Em desenvolvimento, Atualmente trabalhando em melhorias de front-end :warning:
 
 ## Dependências
 Esse projeto tem o Sidekiq como um dos seus requerimentos:
@@ -23,18 +24,24 @@ Authentication was handled by:
 
 
 ### QuickStart
-Após instaladas as dependências, abra o terminal e faça os comandos:
-**db:create**<br/>
-**db:migrate**<br/>
-**db:seed**<br/>
-**Abra um terminal e execute o comando:** Redis-Server
-**Em outro terminal abra a pasta root do projeto e inicie o Sidekiq com o comando:** Bundle exec sidekiq
+Após instaladas as dependências, abra o terminal e faça os comandos:<br/>
+`db:create`<br/>
+`db:migrate`<br/>
+`db:seed`<br/>
+**Abra um terminal e execute o comando:** `redis-server`</br>
+**Em outro terminal abra a pasta root do projeto e inicie o Sidekiq com o comando:** `bundle exec sidekiq`
 - OBS:
   É de muito importante iniciar o Redis e Sidekiq antes de dar Rails S na aplicação pois é o sidekiq que vai iniciar e encerra as auctions. 
 
 A seed irá conter 2 usuários admins e 2 usuários regulares:<br/>
-**Admins:**
-  **Nome:** AdminMaster, **Email:** adminmaster@leilaodogalpao.com.br, **Password:** password
-  **Nome:** AdminSecond, **Email:** adminsecond@leilaodogalpao.com.br, **Password:** password
+**Admins:**<br/>
+- **Nome:** AdminMaster, **Email:** adminmaster@leilaodogalpao.com.br, **Password:** password<br/>
+- **Nome:** AdminSecond, **Email:** adminsecond@leilaodogalpao.com.br, **Password:** password<br/>
+**Usuários:**<br/>
+- **Nome:** FirstUser, **Email:** firstuser@email.com.br, **Password:** password<br/>
+- **Nome:** SecondUser, **Email:** seconduser@email.com.br, **Password:** password<br/>
+
+__________________________________________________________________________________________________________</br>
+
 
 
