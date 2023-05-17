@@ -1,6 +1,5 @@
-# README
-
-# Walisson Santos Auction App - Senhos sonhos a um lance de distância
+# Walisson Santos Auction App<br/>Senhos a um lance de distância
+Senhos a um lance de distância
 <image src="https://img.shields.io/github/languages/top/sorwalisson/Auction-app">
 
 ## Descrição: Este é um projeto com a finalidade de estudos e demonstração das minhas habilidades atuais como dev, além de uma ferramente de melhoria para minhas habilidades de desenvolvedor Rails.
@@ -10,7 +9,7 @@ Project Size: <image src="https://img.shields.io/github/repo-size/sorwalisson/Au
 
 ## Dependências
 Esse projeto tem o Sidekiq como um dos seus requerimentos:
-<image src="https://img.shields.io/badge/Sidekiq-7.1.0-green"> <br/>
+<image src="https://img.shields.io/badge/Sidekiq-7.1.0-green" href="https://github.com/sidekiq/sidekiq"> <br/>
 E o Sidekiq por sua vez tem o Redis como requiremento:
 <image src="https://img.shields.io/badge/Redis-7.0.11-green"><br/>
 Para testes usei o RSpec:
