@@ -42,6 +42,8 @@ A seed irá conter 2 usuários admins e 2 usuários regulares:<br/>
 - **Nome:** FirstUser, **Email:** firstuser@email.com.br, **Password:** password<br/>
 - **Nome:** SecondUser, **Email:** seconduser@email.com.br, **Password:** password<br/>
 
+A seed também irá conter 4 Auctions com um item cada, Após executar o `db:seed`, deve-se logar como um admin e ir até o Admin Panel e ir até essas Auctions e mudar seu `status:` para `:awaiting_confirmation`, e em seguidar logar no segundo admin para mudar o `status:` para `:confirmed`.
+
 ### Regras de Negócios utilizadas:<br/>
 **Users:**<br/>
   - Usuários tem um atributo boolean que determina se ele é admin ou não:<br/>
